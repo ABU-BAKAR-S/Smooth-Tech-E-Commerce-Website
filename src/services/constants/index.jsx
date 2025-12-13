@@ -1,0 +1,15 @@
+export const ERROR = "ERROR";
+export const LOADING = "LOADING";
+export const SET_PRODUCTS = "SET_PRODUCTS";
+
+export const INCREMENT_COUNT = "INCREMENT_COUNT";
+
+export const DECREASE_QTY = "DECREASE_QTY";
+export const INCREASE_QTY = "INCREASE_QTY";
+
+export const ADD_TO_CART = "ADD_TO_CART";
+export const REMOVE_FROM_CART = "REMOVE_FROM_CART";
+export const CLEAR_SHOPPING_CART = "CLEAR_SHOPPING_CART";
+
+export const ADD_TO_WISHLIST = "ADD_TO_WISHLIST";
+export const REMOVE_FROM_WISHLIST = "REMOVE_FROM_WISHLIST";

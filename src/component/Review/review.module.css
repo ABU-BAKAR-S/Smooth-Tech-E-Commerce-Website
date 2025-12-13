@@ -1,0 +1,25 @@
+.card {
+  flex-basis: 45%;
+  padding: 10px;
+  border: 1px solid green;
+}
+.card_header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.card_head_left {
+  display: flex;
+  align-items: center;
+}
+.card_head_left .person {
+  font-size: 50px;
+  color: green;
+}
+.card_desc {
+  margin-top: 15px;
+  padding-left: 10px;
+}
+.card_desc p {
+  margin-bottom: 10px;
+}

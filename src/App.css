@@ -1,0 +1,121 @@
+body {
+  min-height: 100vh;
+  /* font-family: Georgia, "Times New Roman", Times, serif; */
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+a {
+  text-decoration: none;
+  color: black;
+}
+ul {
+  text-decoration: none;
+}
+main {
+  padding: 2rem;
+}
+/* ff523b */
+section {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(150px, 1fr));
+  grid-gap: 1.2rem;
+}
+.product {
+  position: relative;
+  text-align: center;
+  border-radius: 0.6rem;
+  border: 0.5px solid #009688;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.product:hover {
+  transform: scale(1.01);
+  /* border: 0.05rem solid tomato; */
+  box-shadow: 0.2rem 0.3rem 0.5rem rgba(0, 0, 0, 0.3),
+    -0.18rem -0.18rem 0.5rem rgba(0, 0, 0, 0.3);
+}
+.product_img {
+  border-radius: 0.6rem 0.6rem 0 0;
+  background-color: #e0e0e0;
+}
+
+.product_img img {
+  text-align: center;
+  object-fit: cover;
+  width: 10rem;
+  /* height: 10rem; */
+}
+
+.product_discount {
+  position: absolute;
+  top: 10px;
+  color: white;
+  left: 10px;
+  width: 80px;
+  padding: 5px 0px;
+  text-align: center;
+  border-radius: 0.9rem;
+  background-color: #1b8058;
+}
+/* 1B8058,  009688*/
+.product_desc {
+  text-align: left;
+  padding: 0.5rem 0.6rem 0.3rem;
+}
+.product_title {
+  margin: 0.5rem 0;
+}
+.product_price {
+  color: tomato;
+  font-size: 1.3rem;
+}
+
+.product_rating {
+  margin-top: 0.3rem;
+}
+.star_icon {
+  color: red;
+}
+
+.hover_on {
+  position: absolute;
+  top: 20px;
+  right: 15px;
+  display: flex;
+  gap: 10px;
+  flex-direction: column;
+  transform: scale(0);
+  transition: all 0.3s;
+}
+.hover_on .hover_icon {
+  font-size: 20px;
+}
+.hover_on .hover_icon:hover {
+  color: #009688;
+}
+.product:hover .hover_on {
+  transform: scale(1);
+}
+.colored {
+  font-size: 20px;
+  color: #009688;
+}
+.show_more_container {
+  width: 150px;
+  margin: 30px auto;
+}
+
+.show_more_container .show_more_btn {
+  width: 100%;
+  padding: 10px;
+  text-align: center;
+  font-size: 16px;
+  outline: none;
+  cursor: pointer;
+  letter-spacing: 1.5px;
+  transition: all 0.3s;
+  border-radius: 20px;
+  border: 0.5px solid #009688;
+}
+.show_more_container .show_more_btn:hover {
+  background-color: #009688;
+  color: white;
+}
