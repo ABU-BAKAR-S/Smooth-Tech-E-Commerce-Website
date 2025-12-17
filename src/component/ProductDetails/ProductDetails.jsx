@@ -1,10 +1,12 @@
 import React, { useContext } from "react";
-import { Link, useLocation } from "react-router-dom";
+
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 import { IoShareSocialSharp, IoLocationOutline } from "react-icons/io5";
 import { RiTakeawayLine } from "react-icons/ri";
 import { IoMdInformationCircleOutline } from "react-icons/io";
-import { FaRegHeart } from "react-icons/fa";
+import { FaRegHeart, FaHeart } from "react-icons/fa";
 import { GiMoneyStack } from "react-icons/gi";
 import { TbTruckReturn } from "react-icons/tb";
 import { IoShieldCheckmarkOutline } from "react-icons/io5";
@@ -18,10 +20,23 @@ import { ProductsContext } from "../../context";
 import { Header } from "../../layouts/header/Header";
 import { useScrollToTop } from "../customHook/useScrollToTop";
 
+const notify = (text) => {
+  toast.success(text);
+};
+
 export const ProductDetails = () => {
   useScrollToTop();
+  const navigate = useNavigate();
 
-  const { cart, addToCart, removeFromCart } = useContext(ProductsContext);
+  const {
+    isLoggedIn,
+    cart,
+    wishlist,
+    addToCart,
+    removeFromCart,
+    addToWishlist,
+    removeFromWishlist,
+  } = useContext(ProductsContext);
 
   const location = useLocation();
   const { product } = location.state || {};
@@ -41,13 +56,42 @@ export const ProductDetails = () => {
   } = product;
 
   const isItemInCart = cart.some((item) => item.id === id);
+  const isInWishlist = wishlist.some((item) => item.id === id);
 
   const handleAddToCart = () => {
+    if (!isLoggedIn) {
+      navigate("/", { replace: true });
+      return;
+    }
     addToCart(product);
+    notify("Successfully Added To Cart");
   };
 
   const handleRemoveFromCart = () => {
     removeFromCart(id);
+    notify("Successfully Removed From Cart");
+  };
+
+  const handleAddToWishlist = () => {
+    if (!isLoggedIn) {
+      navigate("/", { replace: true });
+      return;
+    }
+    addToWishlist(id);
+    notify("Successfully Added To Wishlist");
+  };
+
+  const handleRemoveFromWishlist = () => {
+    removeFromWishlist(id);
+    notify("Successfully Removed From Wishlist");
+  };
+
+  const handleShareLink = () => {
+    notify("Event isn't added yet!");
+  };
+
+  const handleBuy = () => {
+    notify("Order is confirem!");
   };
 
   return (
@@ -70,8 +114,25 @@ export const ProductDetails = () => {
               <div className={style.product_details_left_rating}>
                 <Rating rating={rating} />
                 <div className={style.share_links}>
-                  <IoShareSocialSharp className={style.share_link} />
-                  <FaRegHeart className={style.share_link} />
+                  <IoShareSocialSharp
+                    className={style.emptyIcon}
+                    onClick={handleShareLink}
+                  />
+                  {isInWishlist ? (
+                    <FaHeart
+                      className={isInWishlist ? style.colored : style.emptyIcon}
+                      onClick={handleRemoveFromWishlist}
+                    />
+                  ) : (
+                    <Link to={"/wishlist"}>
+                      <FaRegHeart
+                        className={
+                          isInWishlist ? style.colored : style.emptyIcon
+                        }
+                        onClick={handleAddToWishlist}
+                      />
+                    </Link>
+                  )}
                 </div>
               </div>
               <div className={style.product_datails_left_brand}>
@@ -106,7 +167,9 @@ export const ProductDetails = () => {
                 </div>
               </div> */}
               <div className={style.product_details_left_btns}>
-                <Link className={style.cartBtn}>Buy Now</Link>
+                <button className={style.cartBtn} onClick={handleBuy}>
+                  Buy Now
+                </button>
 
                 {isItemInCart ? (
                   <Link
@@ -142,29 +205,27 @@ export const ProductDetails = () => {
                   <p> Dhaka, Dhaka-North,Dhour,Road No. 7 </p>
                 </div>
               </div>
-              <a href="#" className={style.change_location_icon}>
-                CHANGE
-              </a>
+              <a className={style.change_location_icon}>CHANGE</a>
             </div>
             <div className={style.product_details_right_desc}>
               <div className={style.desc_left}>
                 <RiTakeawayLine className={style.left_icon} />
                 <div>
-                  <h4>Standard Delivery</h4>
+                  <p>Standard Delivery</p>
                   <small> {shippingInformation} </small>
                 </div>
               </div>
-              <p> $10 </p>
+              <p className={style.delivery}> $10 </p>
             </div>
             <div className={style.product_details_right_desc}>
               <div className={style.desc_left}>
                 <GiMoneyStack className={style.left_icon} />{" "}
                 <div>
-                  <h4>Cash On Delivery Available</h4>
+                  <p>Cash On Delivery Available</p>
                 </div>
               </div>
             </div>
-            <div className={style.product_details_right_desc}>
+            <div className={style.product_details_right_small_desc}>
               <small>Return & Warranty</small>
               <IoMdInformationCircleOutline className={style.info_icon} />
             </div>
@@ -172,7 +233,7 @@ export const ProductDetails = () => {
               <div className={style.desc_left}>
                 <TbTruckReturn className={style.left_icon} />
                 <div>
-                  <h4> {returnPolicy ? returnPolicy : "No Return Policy"} </h4>
+                  <p> {returnPolicy ? returnPolicy : "No Return Policy"} </p>
                 </div>
               </div>
             </div>
@@ -185,12 +246,12 @@ export const ProductDetails = () => {
                 )}
 
                 <div>
-                  <h4>
+                  <p>
                     {" "}
                     {warrantyInformation
                       ? warrantyInformation
                       : "No Warranty Available"}{" "}
-                  </h4>
+                  </p>
                 </div>
               </div>
             </div>
@@ -199,13 +260,13 @@ export const ProductDetails = () => {
                 <img src={meta.qrCode} alt="" />
               </div>
             </div>
-            <Link to="/" replace>
+            <Link to="/" replace className={style.shopBtn}>
               Go To Shop
             </Link>
           </div>
         </div>
         <div className={style.product_details_bottom}>
-          <h3>Review List</h3>
+          <h3>Review List </h3>
           <div className={style.cards}>
             {reviews.map((review, index) => (
               <Review key={index} review={review} />

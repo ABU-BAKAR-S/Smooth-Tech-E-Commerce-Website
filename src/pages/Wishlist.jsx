@@ -1,17 +1,37 @@
 import React, { useContext } from "react";
-import { RxCrossCircled } from "react-icons/rx";
-import style from "./wishlist.module.css";
-import { ProductsContext } from "../context";
+
 import { Link } from "react-router-dom";
-import { AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
+import { RxCrossCircled } from "react-icons/rx";
+import { BsCartXFill, BsFillCartCheckFill } from "react-icons/bs";
+
+import { ProductsContext } from "../context";
 import { Header } from "../layouts/header/Header";
 import { useScrollToTop } from "../component/customHook/useScrollToTop";
+import style from "./wishlist.module.css";
+import no_item from "../assets/no_item.jpg";
+import { toast } from "react-toastify";
+
+const notify = (text) => {
+  toast.success(text);
+};
 
 export const Wishlist = () => {
   useScrollToTop();
 
-  const { wishlist, addToCart, removeFromWishlist } =
-    useContext(ProductsContext);
+  const {
+    cart,
+    wishlist,
+    addToCart,
+    removeFromCart,
+    removeFromWishlist,
+    clearWishlist,
+  } = useContext(ProductsContext);
+
+  const handleAddAllToCart = () => {
+    wishlist.forEach((item) => addToCart(item));
+    notify("All Items Added To Cart");
+  };
 
   return (
     <>
@@ -39,7 +59,7 @@ export const Wishlist = () => {
                   brand,
                   availabilityStatus,
                 } = item;
-
+                const isItemInCart = cart.some((item) => item.id === id);
                 return (
                   <motion.div
                     key={id}
@@ -50,7 +70,10 @@ export const Wishlist = () => {
                     transition={{ duration: 0.25 }}
                   >
                     <button
-                      onClick={() => removeFromWishlist(id)}
+                      onClick={() => {
+                        removeFromWishlist(id);
+                        notify("Successfully Removed From wishlist");
+                      }}
                       className={style.removeBtn}
                     >
                       <RxCrossCircled />
@@ -84,16 +107,35 @@ export const Wishlist = () => {
                       {availabilityStatus ? availabilityStatus : "Out of Stock"}
                     </span>
 
-                    <motion.button
-                      initial={{ opacity: 0, x: 30 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ duration: 0.3, ease: "easeOut" }}
-                      className={style.addBtn}
-                      onClick={() => addToCart(id)}
-                      disabled={!availabilityStatus}
-                    >
-                      Add to Cart
-                    </motion.button>
+                    {isItemInCart ? (
+                      <motion.button
+                        initial={{ opacity: 0, x: 30 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 0.3, ease: "easeOut" }}
+                        className={style.addBtn}
+                        onClick={() => {
+                          removeFromCart(id);
+                          notify("Successfully Removed From Cart");
+                        }}
+                        disabled={!availabilityStatus}
+                      >
+                        Remove From Cart
+                      </motion.button>
+                    ) : (
+                      <motion.button
+                        initial={{ opacity: 0, x: 30 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ duration: 0.3, ease: "easeOut" }}
+                        className={style.addBtn}
+                        onClick={() => {
+                          addToCart(item);
+                          notify("Successfully Added To Cart");
+                        }}
+                        disabled={!availabilityStatus}
+                      >
+                        Add to Cart
+                      </motion.button>
+                    )}
                   </motion.div>
                 );
               })}
@@ -102,7 +144,7 @@ export const Wishlist = () => {
             <div className={style.actionRow}>
               <input
                 type="text"
-                value="https://www.example.com/wishlist"
+                value="https://smooth-tech.netlify.app/wishlist"
                 className={style.copyInput}
                 readOnly
               />
@@ -111,20 +153,37 @@ export const Wishlist = () => {
                 className={style.copyBtn}
                 onClick={() =>
                   navigator.clipboard.writeText(
-                    "https://www.example.com/wishlist"
+                    "https://smooth-tech.netlify.app/wishlist"
                   )
                 }
               >
                 Copy Link
               </button>
 
-              <button className={style.clearBtn}>Clear Wishlist</button>
+              <button
+                className={style.clearBtn}
+                onClick={() => {
+                  clearWishlist();
+                  notify("All Items Are Removed");
+                }}
+              >
+                Clear Wishlist
+              </button>
 
-              <button className={style.addAllBtn}>Add All to Cart</button>
+              <button className={style.addAllBtn} onClick={handleAddAllToCart}>
+                Add All to Cart
+              </button>
             </div>
           </div>
         ) : (
-          "Nothing to show"
+          <div className="showing_empty">
+            <img src={no_item} alt="no item img" className="showing_img" />
+
+            <Link to={"/"} className="showing_btn">
+              {" "}
+              Continue Shopping{" "}
+            </Link>
+          </div>
         )}
       </article>
     </>

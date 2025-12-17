@@ -1,4 +1,7 @@
 import React from "react";
+
+import { motion } from "framer-motion";
+
 import {
   FaFacebookF,
   FaTwitter,
@@ -8,41 +11,118 @@ import {
 import smooth from "../../assets/smooth.png";
 import style from "./footer.module.css";
 
+const fadeLeft = {
+  hidden: { opacity: 0, x: -60 },
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: { duration: 0.6, ease: "easeOut" },
+  },
+};
+
+const fadeUp = {
+  hidden: { opacity: 0, y: 40 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.5, ease: "easeOut" },
+  },
+};
+
+const stagger = {
+  visible: {
+    transition: {
+      staggerChildren: 0.15,
+    },
+  },
+};
+
+const socialContainer = {
+  hidden: {},
+  visible: {
+    transition: {
+      staggerChildren: 0.12,
+    },
+  },
+};
+
+const socialItem = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.4, ease: "easeOut" },
+  },
+};
+
 export const Footer = () => {
   return (
     <footer className={style.footer}>
-      <div className={style.footerTop}>
+      <motion.div
+        className={style.footerTop}
+        variants={stagger}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.2 }}
+      >
         <div className={style.footerGrid}>
           {/* Brand */}
-          <div className={style.footerBrand}>
+          <motion.div className={style.footerBrand} variants={fadeLeft}>
             <div className={style.brand}>
               <img src={smooth} alt="logo" className={style.logoIcon} />
 
               <h3>Smooth Tech.</h3>
             </div>
             <p>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna.
+              Lorem ipsum dolor sit amet consectetur adipisicing elit.
+              Praesentium esse ratione, excepturi rerum, corporis iste iusto
+              nihil modi cumque, mollitia ad architecto. Nisi, eos laborum!
+              Similique in itaque voluptatem qui!
             </p>
 
-            <div className={style.socialIcons}>
-              <a href="#">
+            <motion.div
+              className={style.socialIcons}
+              variants={socialContainer}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+            >
+              <motion.a
+                href="#"
+                variants={socialItem}
+                whileHover={{ scale: 1.15, rotate: 5 }}
+                whileTap={{ scale: 0.9 }}
+              >
                 <FaFacebookF />
-              </a>
-              <a href="#">
+              </motion.a>
+              <motion.a
+                href="#"
+                variants={socialItem}
+                whileHover={{ scale: 1.15, rotate: -5 }}
+                whileTap={{ scale: 0.9 }}
+              >
                 <FaTwitter />
-              </a>
-              <a href="#">
+              </motion.a>
+              <motion.a
+                href="#"
+                variants={socialItem}
+                whileHover={{ scale: 1.15, rotate: 5 }}
+                whileTap={{ scale: 0.9 }}
+              >
                 <FaInstagram />
-              </a>
-              <a href="#">
+              </motion.a>
+              <motion.a
+                href="#"
+                variants={socialItem}
+                whileHover={{ scale: 1.15, rotate: -5 }}
+                whileTap={{ scale: 0.9 }}
+              >
                 <FaLinkedinIn />
-              </a>
-            </div>
-          </div>
+              </motion.a>
+            </motion.div>
+          </motion.div>
 
-          {/* Company */}
-          <div className={style.footerCol}>
+          <motion.div className={style.footerCol} variants={fadeUp}>
             <h4>Company</h4>
             <ul>
               <li>About Us</li>
@@ -50,10 +130,9 @@ export const Footer = () => {
               <li>Contact Us</li>
               <li>Career</li>
             </ul>
-          </div>
+          </motion.div>
 
-          {/* Customer Services */}
-          <div className={style.footerCol}>
+          <motion.div className={style.footerCol} variants={fadeUp}>
             <h4>Customer Services</h4>
             <ul>
               <li>My Account</li>
@@ -61,36 +140,39 @@ export const Footer = () => {
               <li>Return</li>
               <li>FAQ</li>
             </ul>
-          </div>
+          </motion.div>
 
-          {/* Information */}
-          <div className={style.footerCol}>
+          <motion.div className={style.footerCol} variants={fadeUp}>
             <h4>Our Information</h4>
             <ul>
               <li>Privacy</li>
               <li>User Terms & Condition</li>
               <li>Return Policy</li>
             </ul>
-          </div>
+          </motion.div>
 
-          {/* Contact */}
-          <div className={style.footerCol}>
+          <motion.div className={style.footerCol} variants={fadeUp}>
             <h4>Contact Info</h4>
             <ul>
               <li>+123-456-789</li>
-              <li>example@gmail.com</li>
-              <li>6502 Preston Rd. Inglewood, Maine 98380</li>
+              <li>smoothtech@gmail.com</li>
+              <li>Dhour, Turag, Dhaka-1230</li>
             </ul>
-          </div>
+          </motion.div>
         </div>
-      </div>
+      </motion.div>
 
-      {/* Bottom */}
-      <div className={style.footerBottom}>
+      <motion.div
+        className={style.footerBottom}
+        initial={{ opacity: 0 }}
+        whileInView={{ opacity: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.4, delay: 0.3 }}
+      >
         <p>
           Copyright © 2025 Smooth Tech | Website Design. All Rights Reserved.
         </p>
-      </div>
+      </motion.div>
     </footer>
   );
 };

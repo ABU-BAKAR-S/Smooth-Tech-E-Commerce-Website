@@ -1,18 +1,81 @@
-# React + Vite
+# Welcom to Smooth Tech E-commerce Website
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is the solution of e-commerce website created by using [React](https://react.dev/learn).
 
-Currently, two official plugins are available:
+- [Smooth Tech Website URL](https://smooth-tech.netlify.app/)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Table of contents
 
-## React Compiler
+- [Overview](#overview)
+  - [The challenge](#the-challenge)
+  - [Screenshot](#screenshot)
+  - [Links](#links)
+- [My process](#my-process)
+  - [Built with](#built-with)
+- [Team](#team)
+- [Author](#author)
 
-The React Compiler is enabled on this template. See [this documentation](https://react.dev/learn/react-compiler) for more information.
+## Overview
 
-Note: This will impact Vite dev & build performances.
+### The challenge
 
-## Expanding the ESLint configuration
+The website is dynamic. Users should be able:
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- See 190+ products
+- Show more functionality is added
+- Hover over on product to add wishlist
+- Can add to wishlist from home page
+- Can Add to wishlist from product details page
+- Can Add to cart
+- LocalStorage is used to prevent of losing the product in cart and wishlist
+- See some animation
+- Sign up and log in or log out
+- See form validation messages if:
+  - The field is left empty
+  - The email address is not valid
+  - phone number is not valid
+- This is fully responsive website
+- Success notification will be shown
+- User can subscribe our newsletter
+
+### Screenshot
+
+| Small-Screen-View                        | Large-Screen-View                        |
+| ---------------------------------------- | ---------------------------------------- |
+| ![mobile photo](./src/assets/mobile.png) | ![desktop photo](./src/assets/large.png) |
+
+### Links
+
+- Solution URL: [ solution URL ](https://github.com/ABU-BAKAR-S/Smooth-Tech-E-Commerce-Website)
+- Live Site URL: [ live site URL ](https://smooth-tech.netlify.app/)
+
+## My process
+
+### Built with
+
+- Semantic HTML5 markup
+- CSS custom properties
+- Flexbox
+- Grid
+- Mobile-first workflow
+
+### Resources
+
+- Yup
+- [Formik](https://formik.org/docs/overview)
+- [Formspree](https://formspree.io/)
+- [React Icons](https://react-icons.github.io/react-icons/)
+- [React motion](https://motion.dev/docs/react)
+- [Google Fonts](https://fonts.google.com/)
+- [React Toastify](https://fkhadra.github.io/react-toastify/introduction/)
+- [React router dom](https://reactrouter.com/)
+- [React Loader Spinner](https://mhnpd.github.io/react-loader-spinner/)
+
+### Team
+
+- Md. Abu Bakar Siddik
+- Md. Taukir Jahan Rafi
+
+### Author
+
+- [Abu Bakar Siddik](https://github.com/ABU-BAKAR-S)

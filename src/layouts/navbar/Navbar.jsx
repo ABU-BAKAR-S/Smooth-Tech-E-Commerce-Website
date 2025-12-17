@@ -1,26 +1,47 @@
-import React, { useState } from "react";
-import { NavLink } from "react-router-dom";
+import React, { useContext, useEffect, useState } from "react";
+import { NavLink, useLocation } from "react-router-dom";
 
-import { IoHomeOutline, IoSearch } from "react-icons/io5";
-import { FaRegHeart } from "react-icons/fa";
+import { IoHomeOutline, IoSearch, IoHomeSharp } from "react-icons/io5";
+import { FaRegHeart, FaHeart } from "react-icons/fa";
 import { BsCart3 } from "react-icons/bs";
-import { HiMenu, HiX } from "react-icons/hi";
 import { VscAccount } from "react-icons/vsc";
+import { FaShoppingCart } from "react-icons/fa";
+import { BsPersonCircle } from "react-icons/bs";
 
 import logo from "../../assets/logo.png";
 import style from "./navbar.module.css";
+import { ProductsContext } from "../../context";
 
 export const Navbar = () => {
+  const { pathname } = useLocation();
+
+  const { searchItem } = useContext(ProductsContext);
+
   const [searchProduct, setSearchProduct] = useState("");
+
+  const home = pathname === "/" ? <IoHomeSharp /> : <IoHomeOutline />;
+  const wishlist = pathname === "/wishlist" ? <FaHeart /> : <FaRegHeart />;
+  const cart = pathname === "/cart" ? <FaShoppingCart /> : <BsCart3 />;
+  const profile = pathname === "/profile" ? <BsPersonCircle /> : <VscAccount />;
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+  };
+
+  useEffect(() => {
+    searchItem(searchProduct.toLowerCase());
+  }, [searchProduct, searchItem]);
 
   return (
     <nav className={style.navbar}>
       <div className={style.logoDiv}>
-        <img src={logo} alt="logo" className={style.logo} />
+        <NavLink to={"/"}>
+          <img src={logo} alt="logo" className={style.logo} />
+        </NavLink>
       </div>
 
       <div className={style.searchSection}>
-        <form>
+        <form onSubmit={handleSubmit}>
           <input
             type="text"
             placeholder="Search"
@@ -34,32 +55,25 @@ export const Navbar = () => {
       </div>
 
       <div className={style.navIcons}>
-        <NavLink to="/" className="navLink">
-          <IoHomeOutline />
-        </NavLink>
-        <NavLink to="/wishlist">
-          <FaRegHeart />
-        </NavLink>
-        <NavLink to="/cart">
-          <BsCart3 />
-        </NavLink>
-        <NavLink to="/profile">
-          <VscAccount />
-        </NavLink>
+        <NavLink to="/">{home}</NavLink>
+        <NavLink to="/wishlist">{wishlist}</NavLink>
+        <NavLink to="/cart">{cart}</NavLink>
+        <NavLink to="/profile">{profile}</NavLink>
       </div>
 
       <div className={style.mobileMenu}>
         <NavLink to="/">
-          <IoHomeOutline /> Home
+          {home} <span>Home</span>
         </NavLink>
         <NavLink to="/wishlist">
-          <FaRegHeart /> Wishlist
+          {wishlist}
+          <span>Wishlist</span>
         </NavLink>
         <NavLink to="/cart">
-          <BsCart3 /> Cart
+          {cart} <span>Cart</span>
         </NavLink>
         <NavLink to="/profile">
-          <VscAccount /> Profile
+          {profile} <span>Profile</span>
         </NavLink>
       </div>
     </nav>

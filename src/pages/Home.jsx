@@ -9,8 +9,20 @@ import { useScrollRestoration } from "../component/customHook/useScrollRestorati
 export const Home = () => {
   useScrollRestoration();
 
-  const { products, error, isLoading, incrementCount } =
-    useContext(ProductsContext);
+  const {
+    products,
+    error,
+    isLoading,
+    incrementCount,
+    searchItems,
+    disableBtn,
+  } = useContext(ProductsContext);
+
+  const filteredProducts = searchItems
+    ? products.filter((product) =>
+        product.title.toLowerCase().includes(searchItems)
+      )
+    : products;
 
   const handleShowMore = () => {
     incrementCount();
@@ -33,15 +45,21 @@ export const Home = () => {
           </div>
         ) : (
           <section>
-            {products && products.length
-              ? products.map((product) => (
-                  <Product key={product.id} product={product} />
-                ))
-              : null}
+            {filteredProducts && filteredProducts.length ? (
+              filteredProducts.map((product) => (
+                <Product key={product.id} product={product} />
+              ))
+            ) : (
+              <p> No Product Found! </p>
+            )}
           </section>
         )}
         <div className="show_more_container">
-          <button className="show_more_btn" onClick={handleShowMore}>
+          <button
+            className={disableBtn ? "disablebtn" : "show_more_btn"}
+            onClick={handleShowMore}
+            disabled={disableBtn}
+          >
             Show More
           </button>
         </div>

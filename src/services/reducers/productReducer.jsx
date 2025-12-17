@@ -10,15 +10,23 @@ import {
   REMOVE_FROM_CART,
   CLEAR_SHOPPING_CART,
   REMOVE_FROM_WISHLIST,
+  CLEAR_WISHLIST,
+  SET_LOGGED_IN,
+  SET_SEARCH_ITEMS,
+  SET_BTN_DISABLE,
 } from "../constants";
 
 export const initialState = {
+  count: 0,
+  total: 0,
+  error: null,
   products: [],
   isLoading: false,
-  error: null,
-  cart: [],
-  wishlist: [],
-  count: 0,
+  searchItems: "",
+  disableBtn: false,
+  cart: JSON.parse(localStorage.getItem("cartItem")) || [],
+  wishlist: JSON.parse(localStorage.getItem("wishItem")) || [],
+  isLoggedIn: JSON.parse(localStorage.getItem("isLoggedIn")) || false,
 };
 
 export const productReducer = (state, action) => {
@@ -51,20 +59,21 @@ export const productReducer = (state, action) => {
 
       const exists = state.cart.find((item) => item.id === product.id);
 
+      let updatedCart;
       if (exists) {
-        return {
-          ...state,
-          cart: state.cart.map((item) =>
-            item.id === product.id
-              ? { ...item, quantity: item.quantity + 1 }
-              : item
-          ),
-        };
+        updatedCart = state.cart.map((item) =>
+          item.id === product.id
+            ? { ...item, quantity: item.quantity + 1 }
+            : item
+        );
+      } else {
+        updatedCart = [...state.cart, { ...product, quantity: 1 }];
       }
 
+      localStorage.setItem("cartItem", JSON.stringify(updatedCart));
       return {
         ...state,
-        cart: [...state.cart, { ...product, quantity: 1 }],
+        cart: updatedCart,
       };
     }
 
@@ -72,6 +81,7 @@ export const productReducer = (state, action) => {
       const filteredItem = state.cart.filter(
         (item) => item.id !== action.payload
       );
+      localStorage.setItem("cartItem", JSON.stringify(filteredItem));
       return {
         ...state,
         cart: filteredItem,
@@ -79,6 +89,7 @@ export const productReducer = (state, action) => {
     }
 
     case CLEAR_SHOPPING_CART: {
+      localStorage.removeItem("cartItem");
       return {
         ...state,
         cart: [],
@@ -86,24 +97,28 @@ export const productReducer = (state, action) => {
     }
 
     case INCREASE_QTY: {
+      let increaseQty = state.cart.map((item) =>
+        item.id === action.payload
+          ? { ...item, quantity: item.quantity + 1 }
+          : item
+      );
+      localStorage.setItem("cartItem", JSON.stringify(increaseQty));
       return {
         ...state,
-        cart: state.cart.map((item) =>
-          item.id === action.payload
-            ? { ...item, quantity: item.quantity + 1 }
-            : item
-        ),
+        cart: increaseQty,
       };
     }
 
     case DECREASE_QTY: {
+      let decreaseQty = state.cart.map((item) =>
+        item.id === action.payload
+          ? { ...item, quantity: item.quantity - 1 }
+          : item
+      );
+      localStorage.setItem("cartItem", JSON.stringify(decreaseQty));
       return {
         ...state,
-        cart: state.cart.map((item) =>
-          item.id === action.payload
-            ? { ...item, quantity: item.quantity - 1 }
-            : item
-        ),
+        cart: decreaseQty,
       };
     }
 
@@ -111,10 +126,12 @@ export const productReducer = (state, action) => {
       const foundItem = state.products.find(
         (item) => item.id === action.payload
       );
+      let updatedWishlist = [...state.wishlist, foundItem];
+      localStorage.setItem("wishItem", JSON.stringify(updatedWishlist));
 
       return {
         ...state,
-        wishlist: [...state.wishlist, foundItem],
+        wishlist: updatedWishlist,
       };
     }
 
@@ -122,9 +139,18 @@ export const productReducer = (state, action) => {
       const filteredItem = state.wishlist.filter(
         (item) => item.id !== action.payload
       );
+      localStorage.setItem("wishItem", JSON.stringify(filteredItem));
       return {
         ...state,
         wishlist: filteredItem,
+      };
+    }
+
+    case CLEAR_WISHLIST: {
+      localStorage.removeItem("wishItem");
+      return {
+        ...state,
+        wishlist: [],
       };
     }
 
@@ -132,6 +158,28 @@ export const productReducer = (state, action) => {
       return {
         ...state,
         count: state.count + 1,
+      };
+    }
+
+    case SET_LOGGED_IN: {
+      localStorage.setItem("isLoggedIn", JSON.stringify(action.payload));
+      return {
+        ...state,
+        isLoggedIn: action.payload,
+      };
+    }
+
+    case SET_SEARCH_ITEMS: {
+      return {
+        ...state,
+        searchItems: action.payload,
+      };
+    }
+
+    case SET_BTN_DISABLE: {
+      return {
+        ...state,
+        disableBtn: action.payload,
       };
     }
   }

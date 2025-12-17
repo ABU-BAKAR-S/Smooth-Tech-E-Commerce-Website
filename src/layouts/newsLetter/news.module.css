@@ -1,5 +1,59 @@
 .newsletter {
   width: 100%;
+  margin: 2.5rem auto;
+  text-align: center;
+}
+.newsletter p {
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  font-size: 0.9rem;
+}
+.newsletter h2 {
+  font-weight: 800;
+  font-size: 1.39rem;
+}
+.newsletter h2 span {
+  color: #009688;
+}
+.newsletter small {
+  font-weight: 400;
+  font-family: "Roboto", sans-serif;
+}
+.newsletter form {
+  margin: 1.56rem 0;
+}
+.newsletter form input {
+  width: 21.8rem;
+  outline: none;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #009688;
+  border-radius: 8px;
+  font-weight: 400;
+  font-family: "Roboto", sans-serif;
+}
+.newsletter form button {
+  width: 350px;
+  margin-top: 15px;
+  padding: 10px;
+  font-weight: 400;
+  font-size: 18px;
+  cursor: pointer;
+  outline: none;
+  color: white;
+  border-radius: 8px;
+  background-color: #009688;
+  border: 1px solid #007f73;
+  font-family: "Roboto", sans-serif;
+  transition: all 0.3s ease;
+}
+.newsletter form button:hover {
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15), 0 0 10px rgba(0, 150, 136, 0.4);
+}
+
+/* 
+.newsletter {
+  width: 100%;
   margin: 20px auto 40px;
   text-align: center;
 }
@@ -49,12 +103,6 @@
 .newsletter form button:hover {
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15), 0 0 10px rgba(0, 150, 136, 0.4);
 }
-/* 
-.newsletter form button:hover {
-  
 
 
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25), 0 0 18px rgba(0, 150, 136, 0.7),
-     inset 0 0 8px rgba(255, 255, 255, 0.4); 
-}
 */

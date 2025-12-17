@@ -1,0 +1,114 @@
+/* Wrapper */
+.container {
+  min-height: 100vh;
+  margin: 40px auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* 
+  background: linear-gradient(135deg, #009688, #fff); */
+  font-family: "Roboto", sans-serif;
+}
+
+/* Card */
+.formBox {
+  width: 100%;
+  max-width: 380px;
+  /* background-color: #ffffff; */
+  padding: 30px 25px;
+  border-radius: 14px;
+  border: 0.5px solid #009688;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+}
+
+/* Brand */
+.brand {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.logoIcon {
+  width: 40px;
+  height: 40px;
+}
+
+.brand h3 {
+  font-size: 20px;
+  font-weight: 600;
+  color: #009688;
+}
+
+/* Title */
+.formBox h2 {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 22px;
+  font-weight: 500;
+  color: #333;
+}
+
+/* Form */
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+/* Inputs */
+.form input {
+  width: 100%;
+  padding: 12px 14px;
+  font-size: 15px;
+  border-radius: 0.6rem;
+  border: 1px solid #ccc;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+.form input:focus {
+  border-color: #009688;
+  box-shadow: 0 0 0 2px rgba(0, 150, 136, 0.15);
+}
+
+/* Error text */
+.form span {
+  font-size: 13px;
+  color: #d32f2f;
+  /* margin-top: -5px; */
+}
+
+/* Button */
+.form button {
+  margin-top: 10px;
+  padding: 12px;
+  font-size: 16px;
+  font-weight: 500;
+  border-radius: 0.6rem;
+  border: none;
+  cursor: pointer;
+  color: #ffffff;
+  background: linear-gradient(135deg, #009688, #00796b);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.form button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 20px rgba(0, 150, 136, 0.3);
+}
+
+/* Footer text */
+.formBox p {
+  text-align: center;
+  margin-top: 18px;
+  font-size: 14px;
+  color: #555;
+}
+
+.formBox p span {
+  color: #009688;
+  cursor: pointer;
+  font-weight: 500;
+}

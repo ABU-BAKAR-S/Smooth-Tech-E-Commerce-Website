@@ -2,13 +2,13 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 12px 20px;
+  padding: 0.75rem;
   background: #009688;
 }
 
 .logoDiv {
-  width: 120px;
-  height: 90px;
+  width: 6.25rem;
+  height: 5rem;
 }
 
 .logo {
@@ -22,8 +22,8 @@
   display: flex;
   align-items: center;
   background: rgba(255, 255, 255, 0.2);
-  border-radius: 8px;
-  padding: 6px 15px;
+  border-radius: 0.5rem;
+  padding: 0.5rem;
   backdrop-filter: blur(8px);
 }
 
@@ -31,9 +31,13 @@
   border: none;
   background: transparent;
   outline: none;
-  width: 300px;
+  width: 5rem;
   color: white;
-  font-size: 16px;
+  font-size: 1rem;
+  transition: width 0.3s ease;
+}
+.searchSection input:focus {
+  width: 12.5rem;
 }
 
 .searchSection input::placeholder {
@@ -47,12 +51,12 @@
   cursor: pointer;
   color: white;
   text-align: center;
-  padding-top: 2px;
+  padding-top: 0.125rem;
 }
 
 .navIcons {
   display: flex;
-  gap: 25px;
+  gap: 1.5rem;
 }
 
 .navIcons a {
@@ -68,64 +72,95 @@
   color: red;
 }
 
-.hamburger {
-  display: none;
-  font-size: 2rem;
-  cursor: pointer;
-  color: white;
-}
-
 .mobileMenu {
+  display: flex;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: #1b8058;
+  padding: 0.5rem 0;
+  justify-content: space-around;
+  align-items: center;
+  border-top: 0.0625rem solid rgba(255, 255, 255, 0.2);
+  z-index: 200;
+  border-radius: 0.6rem 0.6rem 0 0;
+}
+
+.mobileMenu a {
+  color: white;
+  font-size: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25;
+  text-decoration: none;
+}
+
+.mobileMenu a:hover {
+  color: #c8e6ff;
+}
+
+.mobileMenu a span {
+  font-size: 1.1rem;
+  color: white;
+  padding-top: 0.2rem;
+  font-family: "Roboto", sans-serif;
+}
+
+.navIcons {
   display: none;
 }
 
-@media (max-width: 820px) {
-  .navIcons {
-    display: none;
-  }
-
-  .searchSection {
-    display: none;
-  }
-
-  .hamburger {
-    display: none;
-  }
-
-  .mobileMenu {
-    display: flex;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    background: #1b8058;
-    padding: 10px 0;
-    justify-content: space-around;
-    align-items: center;
-    border-top: 1px solid rgba(255, 255, 255, 0.2);
-    z-index: 200;
-  }
-
-  .mobileMenu a {
-    color: white;
-    font-size: 1.7rem;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 4px;
-    text-decoration: none;
-  }
-
-  .mobileMenu a:hover {
-    color: #c8e6ff;
-  }
-
-  .mobileMenu a span {
-    font-size: 0.7rem;
-    color: white;
+@media (min-width: 425px) {
+  .searchSection input:focus {
+    width: 14rem;
   }
 }
 
+@media only screen and (min-width: 600px) {
+  .logoDiv {
+    width: 7rem;
+    height: 5rem;
+  }
+  .searchSection input {
+    width: 16rem;
+  }
+  .searchSection input:focus {
+    width: 16rem;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .mobileMenu {
+    display: none;
+  }
+  .navIcons {
+    display: flex;
+    gap: 20px;
+  }
+}
+
+@media only screen and (min-width: 992px) {
+  .searchSection input {
+    width: 18rem;
+  }
+  .searchSection input:focus {
+    width: 18rem;
+  }
+  .navIcons {
+    gap: 25px;
+  }
+}
+
+@media only screen and (min-width: 992px) {
+  .navbar {
+    border-radius: 0 0 0.6rem 0.6rem;
+  }
+  .navIcons a {
+    font-size: 1.8rem;
+  }
+}
 /* 
 
 .navbar {

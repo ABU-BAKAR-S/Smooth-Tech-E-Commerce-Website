@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import { FaRegHeart, FaHeart } from "react-icons/fa";
 
@@ -8,12 +8,33 @@ import { MdOutlineZoomOutMap } from "react-icons/md";
 import Rating from "../rating";
 import { TruncateString } from "../truncateString";
 import { ProductsContext } from "../../context";
+import { toast } from "react-toastify";
+
+const notify = (text) => {
+  toast.success(text);
+};
 
 export const Product = ({ product }) => {
-  const { wishlist, addToWishlist } = useContext(ProductsContext);
+  const { isLoggedIn, wishlist, addToWishlist, removeFromWishlist } =
+    useContext(ProductsContext);
+  const navigate = useNavigate();
   const { id, title, price, rating, images, discountPercentage } = product;
 
   const isInWishlist = wishlist.some((item) => item.id === id);
+
+  const handleAddToWishlist = () => {
+    if (!isLoggedIn) {
+      navigate("/", { replace: true });
+      return;
+    }
+    addToWishlist(id);
+    notify("Successfully Added to Wishlist");
+  };
+
+  const handleRemoveFromWishlist = () => {
+    removeFromWishlist(id);
+    notify("Successfully Removed From Wishlist");
+  };
 
   return (
     <div className="product">
@@ -37,14 +58,15 @@ export const Product = ({ product }) => {
       </Link>
       <div className="hover_on">
         {isInWishlist ? (
-          <FaHeart className={isInWishlist ? "colored" : "hover_icon"} />
+          <FaHeart
+            className={isInWishlist ? "colored" : "hover_icon"}
+            onClick={handleRemoveFromWishlist}
+          />
         ) : (
           <Link to={"/wishlist"}>
             <FaRegHeart
               className={isInWishlist ? "colored" : "hover_icon"}
-              onClick={() => {
-                addToWishlist(id);
-              }}
+              onClick={handleAddToWishlist}
             />
           </Link>
         )}

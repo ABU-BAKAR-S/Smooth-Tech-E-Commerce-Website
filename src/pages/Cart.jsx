@@ -9,6 +9,14 @@ import { CartItem } from "./CartItem";
 import { Header } from "../layouts/header/Header";
 import { useScrollToTop } from "../component/customHook/useScrollToTop";
 
+import no_item from "../assets/no_item.jpg";
+import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
+
+const notify = (text) => {
+  toast.success(text);
+};
+
 export const Cart = () => {
   useScrollToTop();
 
@@ -34,7 +42,7 @@ export const Cart = () => {
 
   const applyCouponCode = () => {
     if (couponCode.trim().toUpperCase() === "SMOOTHTECH10") {
-      setDiscountPercent(10); // $10 discount
+      setDiscountPercent(10);
     } else {
       setDiscountPercent(0);
     }
@@ -56,12 +64,17 @@ export const Cart = () => {
 
   const clearShoppingCart = () => {
     clearCart();
+    notify("All Items Are Removed");
+  };
+
+  const handleProcced = () => {
+    notify("Product is on the way.");
   };
 
   return (
     <>
       <Header title="Shopping Cart" />
-      <article>
+      <article className={style.cart}>
         {cart && cart.length ? (
           <div className={style.cartWrapper}>
             <div className={style.productTable}>
@@ -69,7 +82,7 @@ export const Cart = () => {
                 <span>Product</span>
                 <span>Price</span>
                 <span>Quantity</span>
-                <span>Subtotal</span>
+                <span>Total</span>
               </div>
 
               {cart.map((cartItem) => {
@@ -80,6 +93,7 @@ export const Cart = () => {
                     <button
                       onClick={() => {
                         removeFromCart(id);
+                        notify("Successfully Removed From Cart");
                       }}
                       className={style.removeBtn}
                     >
@@ -174,11 +188,19 @@ export const Cart = () => {
                 <span>${totalPrice}</span>
               </div>
 
-              <button className={style.checkoutBtn}>Proceed to Checkout</button>
+              <button className={style.checkoutBtn} onClick={handleProcced}>
+                Proceed to Checkout
+              </button>
             </div>
           </div>
         ) : (
-          "Nothing to show"
+          <div className="showing_empty">
+            <img src={no_item} alt="no item img" className="showing_img" />
+            <Link to={"/"} className="showing_btn">
+              {" "}
+              Continue Shopping{" "}
+            </Link>
+          </div>
         )}
       </article>
     </>

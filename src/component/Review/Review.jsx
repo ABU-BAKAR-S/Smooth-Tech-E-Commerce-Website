@@ -18,7 +18,7 @@ export default function Review({ review }) {
             <small> {reviewerEmail} </small>
           </div>
         </div>
-        <p> {date.split("T")[0]} </p>
+        <p className={style.date}> {date.split("T")[0]} </p>
       </div>
       <div className={style.card_desc}>
         <p> {comment} </p>

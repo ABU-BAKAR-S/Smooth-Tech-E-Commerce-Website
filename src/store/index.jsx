@@ -8,6 +8,7 @@ import {
   ADD_TO_CART,
   ADD_TO_WISHLIST,
   CLEAR_SHOPPING_CART,
+  CLEAR_WISHLIST,
   DECREASE_QTY,
   ERROR,
   INCREASE_QTY,
@@ -15,7 +16,10 @@ import {
   LOADING,
   REMOVE_FROM_CART,
   REMOVE_FROM_WISHLIST,
+  SET_BTN_DISABLE,
+  SET_LOGGED_IN,
   SET_PRODUCTS,
+  SET_SEARCH_ITEMS,
 } from "../services/constants";
 
 export const ProductStore = ({ children }) => {
@@ -37,8 +41,12 @@ export const ProductStore = ({ children }) => {
         payload: {
           products: data.products,
           append: count > 0,
+          total: data.total,
         },
       });
+      if ((count + 1) * LIMIT >= data.total) {
+        dispatch({ type: SET_BTN_DISABLE, payload: true });
+      }
     } catch (error) {
       dispatch({ type: ERROR, payload: error.message });
     }
@@ -55,6 +63,9 @@ export const ProductStore = ({ children }) => {
     isLoading: state.isLoading,
     error: state.error,
     count: state.count,
+    isLoggedIn: state.isLoggedIn,
+    searchItems: state.searchItems,
+    disableBtn: state.disableBtn,
     addToCart: (cartItem) => {
       dispatch({ type: ADD_TO_CART, payload: cartItem });
     },
@@ -76,12 +87,23 @@ export const ProductStore = ({ children }) => {
     removeFromWishlist: (id) => {
       dispatch({ type: REMOVE_FROM_WISHLIST, payload: id });
     },
+    clearWishlist: () => {
+      dispatch({ type: CLEAR_WISHLIST });
+    },
     incrementCount: () => {
       dispatch({ type: INCREMENT_COUNT });
     },
+    loggedIn: (value) => {
+      if (!value) localStorage.removeItem("isLoggedIn");
+      dispatch({ type: SET_LOGGED_IN, payload: value });
+    },
+    searchItem: (value) => {
+      dispatch({ type: SET_SEARCH_ITEMS, payload: value });
+    },
+    setBtnDisable: (value) => {
+      dispatch({ type: SET_SEARCH_ITEMS, payload: value });
+    },
   };
-
-  console.log(value.count);
 
   return (
     <ProductsContext.Provider value={value}>

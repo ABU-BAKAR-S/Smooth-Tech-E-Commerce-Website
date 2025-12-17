@@ -1,7 +1,7 @@
 body {
+  max-width: 1400px;
+  margin: 0 auto;
   min-height: 100vh;
-  /* font-family: Georgia, "Times New Roman", Times, serif; */
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 a {
   text-decoration: none;
@@ -11,9 +11,175 @@ ul {
   text-decoration: none;
 }
 main {
-  padding: 2rem;
+  padding: 0.8rem;
 }
 /* ff523b */
+
+section {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(160px, 1fr));
+  grid-gap: 1.2rem;
+}
+.product {
+  position: relative;
+  text-align: center;
+  border-radius: 0.6rem;
+  border: 0.5px solid #009688;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.product:hover {
+  transform: scale(1.01);
+  box-shadow: 0.2rem 0.3rem 0.5rem rgba(0, 0, 0, 0.3),
+    -0.18rem -0.18rem 0.5rem rgba(0, 0, 0, 0.3);
+}
+.product_img {
+  border-radius: 0.6rem 0.6rem 0 0;
+  background-color: #e0e0e0;
+}
+
+.product_img img {
+  text-align: center;
+  object-fit: cover;
+  width: 10rem;
+}
+
+.product_discount {
+  position: absolute;
+  top: 0.6rem;
+  color: white;
+  left: 0.6rem;
+  width: 5rem;
+  padding: 0.3rem 0px;
+  text-align: center;
+  border-radius: 0.9rem;
+  background-color: #1b8058;
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+}
+/* 1B8058,  009688*/
+.product_desc {
+  text-align: left;
+  padding: 0.5rem 0.6rem 0.3rem;
+}
+.product_title {
+  font-family: "Roboto", sans-serif;
+  font-weight: 700;
+  margin: 0.5rem 0;
+}
+.product_price {
+  color: #f44336;
+  font-size: 1.3rem;
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+}
+
+.product_rating {
+  margin-top: 0.3rem;
+}
+.star_icon {
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  color: #f44336;
+}
+
+.hover_on {
+  position: absolute;
+  top: 1.25rem;
+  right: 1rem;
+  display: flex;
+  gap: 0.6rem;
+  flex-direction: column;
+  transform: scale(0);
+  transition: all 0.3s;
+  cursor: pointer;
+}
+.hover_on .hover_icon {
+  font-size: 1.25rem;
+}
+.hover_on .hover_icon:hover {
+  color: #009688;
+}
+.product:hover .hover_on {
+  transform: scale(1);
+}
+.colored {
+  font-size: 1.25rem;
+  color: #009688;
+}
+.show_more_container {
+  width: 9.3rem;
+  margin: 2rem auto;
+}
+
+.show_more_container .show_more_btn {
+  width: 100%;
+  padding: 0.6rem;
+  text-align: center;
+  font-size: 1rem;
+  outline: none;
+  cursor: pointer;
+  letter-spacing: 1.5px;
+  transition: all 0.3s;
+  border-radius: 1.25rem;
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  border: 0.5px solid #009688;
+}
+
+.show_more_container .disablebtn {
+  width: 100%;
+  padding: 0.6rem;
+  text-align: center;
+  font-size: 1rem;
+  outline: none;
+  letter-spacing: 1.5px;
+  transition: all 0.3s;
+  border-radius: 1.25rem;
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  border: 0.5px solid #009688;
+  cursor: not-allowed;
+}
+
+.show_more_container .show_more_btn:hover {
+  background-color: #009688;
+  color: white;
+}
+
+@media only screen and (min-width: 768px) {
+  main {
+    padding: 1rem;
+  }
+  section {
+    grid-template-columns: repeat(3, minmax(160px, 1fr));
+    grid-gap: 1rem;
+  }
+}
+
+@media only screen and (min-width: 992px) {
+  main {
+    padding: 1.5rem;
+  }
+  section {
+    grid-template-columns: repeat(4, minmax(160px, 1fr));
+    grid-gap: 1rem;
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  main {
+    padding: 2rem;
+  }
+  section {
+    grid-template-columns: repeat(5, minmax(160px, 1fr));
+    grid-gap: 1rem;
+  }
+}
+
+/* 1B8058,  009688*/
+
+/* 
+
 section {
   display: grid;
   grid-template-columns: repeat(5, minmax(150px, 1fr));
@@ -28,7 +194,7 @@ section {
 }
 .product:hover {
   transform: scale(1.01);
-  /* border: 0.05rem solid tomato; */
+
   box-shadow: 0.2rem 0.3rem 0.5rem rgba(0, 0, 0, 0.3),
     -0.18rem -0.18rem 0.5rem rgba(0, 0, 0, 0.3);
 }
@@ -41,7 +207,7 @@ section {
   text-align: center;
   object-fit: cover;
   width: 10rem;
-  /* height: 10rem; */
+
 }
 
 .product_discount {
@@ -55,7 +221,7 @@ section {
   border-radius: 0.9rem;
   background-color: #1b8058;
 }
-/* 1B8058,  009688*/
+
 .product_desc {
   text-align: left;
   padding: 0.5rem 0.6rem 0.3rem;
@@ -119,3 +285,5 @@ section {
   background-color: #009688;
   color: white;
 }
+
+*/

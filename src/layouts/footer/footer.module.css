@@ -2,6 +2,141 @@
   background-color: #009688;
   color: #ffffff;
   font-family: "Roboto", sans-serif;
+  margin: 20px 15px 80px;
+  border-radius: 10px;
+}
+
+.footerTop {
+  padding: 20px;
+}
+
+.footerGrid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 40px;
+  text-align: center;
+}
+
+.footerBrand p {
+  margin: 15px 0 20px;
+  font-size: 14px;
+  line-height: 1.6;
+  color: #e5f3ee;
+  text-align: center;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.brand h3 {
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.logoIcon {
+  width: 80px;
+}
+
+.socialIcons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+}
+
+.socialIcons a {
+  width: 36px;
+  height: 36px;
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  transition: background 0.3s;
+}
+
+.socialIcons a:hover {
+  background: #ffc107;
+  color: #1b8058;
+}
+
+.footerCol h4 {
+  font-size: 16px;
+  margin-bottom: 15px;
+  font-weight: 600;
+}
+
+.footerCol ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footerCol ul li {
+  font-size: 14px;
+  margin-bottom: 10px;
+  color: #e5f3ee;
+  cursor: pointer;
+}
+
+.footerCol ul li:hover {
+  color: #ffc107;
+}
+
+.footerBottom {
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  padding: 20px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 13px;
+  color: #e5f3ee;
+  text-align: center;
+}
+
+@media only screen and (min-width: 600px) {
+  .footerGrid {
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+  }
+  .footerBrand p {
+    text-align: left;
+  }
+  .socialIcons {
+    justify-content: start;
+  }
+  .footerCol {
+    padding-top: 2rem;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .footer {
+    margin: 20px 15px;
+  }
+}
+
+@media only screen and (min-width: 992px) {
+  .footerGrid {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  .footerGrid {
+    grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
+  }
+}
+
+/* 
+.footer {
+  background-color: #009688;
+  color: #ffffff;
+  font-family: "Roboto", sans-serif;
   margin: 15px;
   border-radius: 10px;
 }
@@ -35,7 +170,6 @@
 }
 
 .logoIcon {
-  /* font-size: 28px; */
   width: 80px;
 }
 
@@ -94,7 +228,6 @@
   color: #e5f3ee;
 }
 
-/* Responsive */
 @media (max-width: 1024px) {
   .footerGrid {
     grid-template-columns: repeat(2, 1fr);
@@ -113,3 +246,5 @@
     text-align: center;
   }
 }
+
+*/
